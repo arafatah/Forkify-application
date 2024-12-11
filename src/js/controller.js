@@ -4,7 +4,6 @@ import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-
 // https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
@@ -29,14 +28,13 @@ const controlRecipes = async function () {
     if (!id) return;
 
     recipeView.renderSpinner();
-    // Loading recipe from server
 
+    // Loading recipe from server
     await model.loadRecipe(id);
 
     // Render recipe
     recipeView.render(model.state.recipe);
-
-   
+    
   } catch (err) {
     alert(err);
   }
@@ -44,7 +42,13 @@ const controlRecipes = async function () {
 
 // controlRecipes();
 
+const init = function () {
+  recipeView.addHandleRender(controlRecipes);
+};
+
+init();
+
 //Better and simpler way
-['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+// ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
 // window.addEventListener('hashchange', controlRecipes);
 // window.addEventListener('load', controlRecipes);

@@ -4,15 +4,6 @@ import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -30,32 +21,6 @@ Like:
 4. As a user, I want to be able to create my own recipes, so that i have them all organized in the same app. 
 5. As a user, I want to be able to see my bookmarks and own recipes when I leave the app and come back later, so that I can close the app safely after I'm done.
 */
-
-// const getJSON = async function (url) {
-//   try {
-//     const res = await Promise.race([fetch(url), timeout(10)]);
-//     const data = await res.json();
-//     if (!res.ok) throw new Error(`${data.message} ${res.status}`);
-//     return data;
-//   } catch (err) {
-//     throw err;
-//   }
-// };
-
-// const showRecipe = async function () {
-//   try {
-//     const data = await getJSON(
-//       `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`
-//     );
-//     console.log(data);
-//   } catch (err) {
-//     console.error(`${err} 💥💥💥`);
-//   }
-// };
-
-// showRecipe();
-
-
 
 const controlRecipes = async function () {
   try {

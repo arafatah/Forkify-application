@@ -23,11 +23,15 @@ Like:
 5. As a user, I want to be able to see my bookmarks and own recipes when I leave the app and come back later, so that I can close the app safely after I'm done.
 */
 
+// if (module.hot) {
+//   module.hot.accept();
+// }
+
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    if (!id) return;
 
+    if (!id) return;
     recipeView.renderSpinner();
 
     // Loading recipe from server
@@ -45,16 +49,17 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
-    resultsView.renderSpinner();
+    
     // Get search query
     const query = searchView.getQuery();
     if (!query) return;
+
+    resultsView.renderSpinner();
 
     // Load search results
     await model.loadSearchResults(query);
 
     // Render search results
-    console.log(model.state.search.result);
     resultsView.render(model.state.search.result);
   } catch (err) {
     console.log(err);

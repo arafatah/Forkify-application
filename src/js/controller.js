@@ -2,6 +2,7 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -49,7 +50,6 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
-    
     // Get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -60,7 +60,10 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // Render search results
-    resultsView.render(model.state.search.result);
+    resultsView.render(model.getSearchResultPage());
+
+    // Render initial pagination buttons
+    paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }

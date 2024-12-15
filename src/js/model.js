@@ -53,10 +53,19 @@ export const loadSearchResults = async function (query) {
 };
 
 export const getSearchResultPage = function (page = state.search.page) {
-  state.search.page = page; 
-  
+  state.search.page = page;
+
   const start = (page - 1) * state.search.resultPerPage; // 0;
   const end = page * state.search.resultPerPage; // 9;.
 
   return state.search.result.slice(start, end);
+};
+
+export const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+    // newQt = oldQt * newServings / oldServings // 2* 8 /4 = 4
+  });
+
+  state.recipe.servings = newServings;
 };

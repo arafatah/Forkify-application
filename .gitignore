@@ -9,3 +9,4 @@ dist
 dist/
 *.min.js
 *.log
+.parcel-cache/*
